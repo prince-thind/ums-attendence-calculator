@@ -1,22 +1,32 @@
-const fs=require('fs');
-const weekStructure=require('./weekStructure.json')
-const absents=require('./absents.json')
-const holidays=require('./holidays.json');
+const fs = require('fs');
+const pen = fs.createWriteStream('./output.csv');
+
+const weekStructure = require('./weekStructure.json')
+const absents = require('./absents.json')
+const holidays = require('./holidays.json');
 
 const calender = getCalender();
 const totalLectures = getTotalLectures();
 
 const finalCalender = calender.map(calculatePercentage);
 
+toCSV(finalCalender);
 
-console.log(...finalCalender)
+
+function toCSV() {
+    pen.write('Date,Percentage,INT222,SOC888,INT407,INT405\n');
+    for (const calenderDay of finalCalender) {
+        pen.write(`${calenderDay.date.toISOString().split("T")[0]},${calenderDay.totalPercentage},${calenderDay.int222.percentage},${calenderDay.soc808.percentage},${calenderDay.int407.percentage},${calenderDay.int405.percentage}\n`)
+    }
+}
+
 
 function calculatePercentage(calenderDay) {
     calenderDay.int222.percentage = getPercentage(calenderDay.date, 'int222');
     calenderDay.soc808.percentage = getPercentage(calenderDay.date, 'soc808');
     calenderDay.int405.percentage = getPercentage(calenderDay.date, 'int405');
     calenderDay.int407.percentage = getPercentage(calenderDay.date, 'int407');
-    calenderDay.totalPercentage=+((calenderDay.int222.percentage+calenderDay.soc808.percentage+calenderDay.int405.percentage+calenderDay.int407.percentage)/4).toFixed(2)
+    calenderDay.totalPercentage = +((calenderDay.int222.percentage + calenderDay.soc808.percentage + calenderDay.int405.percentage + calenderDay.int407.percentage) / 4).toFixed(2)
     return calenderDay;
 }
 
@@ -25,9 +35,9 @@ function getPercentage(tillDate, subject) {
 
     const attended = calender.reduce((acc, calenderDay) => {
         if (tillDate < calenderDay.date) return acc;
-        const absentDay=absents.find(absentDate=>absentDate.date==calenderDay.date.toISOString().split("T")[0])
-        if(absentDay){
-            if(absentDay.subjects.includes(subject)) return acc;
+        const absentDay = absents.find(absentDate => absentDate.date == calenderDay.date.toISOString().split("T")[0])
+        if (absentDay) {
+            if (absentDay.subjects.includes(subject)) return acc;
         }
         return acc + calenderDay[subject].lecturesToday;
     }, 0)
