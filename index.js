@@ -26,24 +26,38 @@ function calculatePercentage(calenderDay) {
     calenderDay.soc808.percentage = getPercentage(calenderDay.date, 'soc808');
     calenderDay.int405.percentage = getPercentage(calenderDay.date, 'int405');
     calenderDay.int407.percentage = getPercentage(calenderDay.date, 'int407');
-    calenderDay.totalPercentage = +((calenderDay.int222.percentage + calenderDay.soc808.percentage + calenderDay.int405.percentage + calenderDay.int407.percentage) / 4).toFixed(2)
-    return calenderDay;
+    calenderDay.totalPercentage = calculateTotalPercentage(calenderDay.date);
+     return calenderDay;
 }
 
 function getPercentage(tillDate, subject) {
     const total = totalLectures[subject];
+    const attended = getAttendedLecturesTillDate(tillDate, subject)
+    const percentage = +(attended / total * 100).toFixed(2);
+    return percentage;
+}
 
-    const attended = calender.reduce((acc, calenderDay) => {
+function calculateTotalPercentage(date){
+    const total = totalLectures['int222']+totalLectures['soc808']+totalLectures['int405']+totalLectures['int407'];
+    const int222=getAttendedLecturesTillDate(date,'int222');
+    const soc808=getAttendedLecturesTillDate(date,'soc808');
+    const int405=getAttendedLecturesTillDate(date,'int405');
+    const int407=getAttendedLecturesTillDate(date,'int407');
+
+    const attended=int222+soc808+int407+int405;
+
+    return +(attended/total*100).toFixed(2)
+}
+
+function getAttendedLecturesTillDate(tillDate, subject) {
+    return calender.reduce((acc, calenderDay) => {
         if (tillDate < calenderDay.date) return acc;
         const absentDay = absents.find(absentDate => absentDate.date == calenderDay.date.toISOString().split("T")[0])
         if (absentDay) {
-            if (Object.keys(absentDay.subjects).includes(subject)) return acc+ calenderDay[subject].lecturesToday-absentDay.subjects[subject];
+            if (Object.keys(absentDay.subjects).includes(subject)) return acc + calenderDay[subject].lecturesToday - absentDay.subjects[subject];
         }
         return acc + calenderDay[subject].lecturesToday;
     }, 0)
-
-    const percentage = +(attended / total * 100).toFixed(2);
-    return percentage;
 }
 
 function getCalender() {
