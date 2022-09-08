@@ -1,14 +1,15 @@
+const fs=require('fs');
+const weekStructure=require('./weekStructure.json')
+const absents=require('./absents.json')
+const holidays=require('./holidays.json');
+
 const calender = getCalender();
 const totalLectures = getTotalLectures();
 
-const absents=[
-    {
-        date:new Date("2022-08-25").toISOString().split("T")[0],
-        subjects:['int407','int222']
-    }
-]
 const finalCalender = calender.map(calculatePercentage);
 
+
+console.log(...finalCalender)
 
 function calculatePercentage(calenderDay) {
     calenderDay.int222.percentage = getPercentage(calenderDay.date, 'int222');
@@ -37,7 +38,7 @@ function getPercentage(tillDate, subject) {
 
 function getCalender() {
     const res = [];
-    const daysOfWeek = getDays();
+    const daysOfWeek = weekStructure;
     for (let i = 1; i <= 7 * 16; i++) {
         const obj = {};
 
@@ -59,91 +60,9 @@ function getCalender() {
 
 function isDateHoliday(date) {
     const finalDate = date.toISOString().split('T')[0];
-    const holidays = [
-        new Date("2022-08-15"),
-        new Date("2022-09-20"),
-        new Date("2022-09-21"),
-        new Date("2022-09-22"),
-        new Date("2022-09-23"),
-        new Date("2022-09-24"),
-        new Date("2022-09-25"),
-        new Date("2022-09-26"),
-        new Date("2022-10-05"),
-        new Date("2022-10-24"),
-        new Date("2022-10-25"),
-        new Date("2022-11-08"),
-    ].map(e => e.toISOString().split('T')[0])
-
     if (holidays.includes(finalDate)) return true;
     return false;
 }
-
-function getPresentAttendence() {
-    return {
-        int222: {
-            total: 22,
-            attended: 20
-        },
-        int405: {
-            total: 18,
-            attended: 18
-        },
-        int407: {
-            total: 16,
-            attended: 15
-        },
-        soc808: {
-            total: 16,
-            attended: 16
-        },
-    }
-
-}
-
-function getDays() {
-    return [
-        {
-            int222: 0,
-            int405: 0,
-            int407: 0,
-            soc808: 0,
-        },
-        {
-            int222: 0,
-            int405: 0,
-            int407: 1,
-            soc808: 1,
-        }, {
-            int222: 2,
-            int405: 3,
-            int407: 0,
-            soc808: 1,
-        }, {
-            int222: 0,
-            int405: 0,
-            int407: 1,
-            soc808: 1,
-        }, {
-            int222: 2,
-            int405: 0,
-            int407: 1,
-            soc808: 0,
-        }, {
-            int222: 0,
-            int405: 0,
-            int407: 0,
-            soc808: 0,
-        }, {
-            int222: 0,
-            int405: 0,
-            int407: 0,
-            soc808: 0,
-        },
-
-
-    ]
-}
-
 
 function getTotalLectures() {
     const totalLectures = {

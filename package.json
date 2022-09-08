@@ -1,0 +1,20 @@
+{
+  "name": "ums-attendence-calculator",
+  "version": "1.0.0",
+  "description": "+ weeks starts from sunday inside weekStructure.json + run npm start to generate a csv report of attedence",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/prince-thind-archive/ums-attendence-calculator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/prince-thind-archive/ums-attendence-calculator/issues"
+  },
+  "homepage": "https://github.com/prince-thind-archive/ums-attendence-calculator#readme"
+}
