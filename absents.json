@@ -1,6 +1,9 @@
 [
   {
     "date": "2022-08-25",
-    "subjects": ["int407", "int222"]
+    "subjects": {
+      "int407": 1,
+      "int222": 2
+    }
   }
 ]

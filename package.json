@@ -4,7 +4,7 @@
   "description": "+ weeks starts from sunday inside weekStructure.json + run npm start to generate a csv report of attedence",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",

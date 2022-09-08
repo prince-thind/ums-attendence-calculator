@@ -37,7 +37,7 @@ function getPercentage(tillDate, subject) {
         if (tillDate < calenderDay.date) return acc;
         const absentDay = absents.find(absentDate => absentDate.date == calenderDay.date.toISOString().split("T")[0])
         if (absentDay) {
-            if (absentDay.subjects.includes(subject)) return acc;
+            if (Object.keys(absentDay.subjects).includes(subject)) return acc+ calenderDay[subject].lecturesToday-absentDay.subjects[subject];
         }
         return acc + calenderDay[subject].lecturesToday;
     }, 0)
