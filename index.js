@@ -1,9 +1,11 @@
-const TOTAL_WEEKS=6;
+const TOTAL_WEEKS = 16;
 
 const fs = require('fs');
 const pen = fs.createWriteStream('./output.csv');
 
 const weekStructure = require('./weekStructure.json')
+const subjects = Object.keys(weekStructure[0]);
+
 const absents = require('./absents.json')
 const holidays = require('./holidays.json');
 const noClasses = require('./noClasses.json');
@@ -18,31 +20,30 @@ const finalCalender = calender.map(calculatePercentage);
 toCSV(finalCalender);
 
 
-function removeNoClasses(calenderDay){
-    const noClassesDay=noClasses.find(entry=>entry.date==calenderDay.date.toISOString().split("T")[0])
-    if(noClassesDay){
-        for(const [subject,missedClasses] of Object.entries(noClassesDay.subjects)){
-            calenderDay[subject].lecturesToday=calenderDay[subject].lecturesToday-missedClasses;
+function removeNoClasses(calenderDay) {
+    const noClassesDay = noClasses.find(entry => entry.date == calenderDay.date.toISOString().split("T")[0])
+    if (noClassesDay) {
+        for (const [subject, missedClasses] of Object.entries(noClassesDay.subjects)) {
+            calenderDay[subject].lecturesToday = calenderDay[subject].lecturesToday - missedClasses;
         }
 
     }
 }
 
 function toCSV() {
-    pen.write('Date,Percentage,INT222,SOC888,INT407,INT405\n');
+    pen.write(`Date,Percentage,${subjects.join(",")}\n`);
     for (const calenderDay of finalCalender) {
-        pen.write(`${calenderDay.date.toISOString().split("T")[0]},${calenderDay.totalPercentage},${calenderDay.int222.percentage},${calenderDay.soc808.percentage},${calenderDay.int407.percentage},${calenderDay.int405.percentage}\n`)
+        pen.write(`${calenderDay.date.toISOString().split("T")[0]},${calenderDay.totalPercentage},${calenderDay[subjects[0]].percentage},${calenderDay[subjects[1]].percentage},${calenderDay[subjects[2]].percentage},${calenderDay[subjects[3]].percentage},\n`)
     }
 }
 
 
 function calculatePercentage(calenderDay) {
-    calenderDay.int222.percentage = getPercentage(calenderDay.date, 'int222');
-    calenderDay.soc808.percentage = getPercentage(calenderDay.date, 'soc808');
-    calenderDay.int405.percentage = getPercentage(calenderDay.date, 'int405');
-    calenderDay.int407.percentage = getPercentage(calenderDay.date, 'int407');
+    for (const subject of subjects) {
+        calenderDay[subject].percentage = getPercentage(calenderDay.date, subject);
+    }
     calenderDay.totalPercentage = calculateTotalPercentage(calenderDay.date);
-     return calenderDay;
+    return calenderDay;
 }
 
 function getPercentage(tillDate, subject) {
@@ -52,16 +53,19 @@ function getPercentage(tillDate, subject) {
     return percentage;
 }
 
-function calculateTotalPercentage(date){
-    const total = totalLectures['int222']+totalLectures['soc808']+totalLectures['int405']+totalLectures['int407'];
-    const int222=getAttendedLecturesTillDate(date,'int222');
-    const soc808=getAttendedLecturesTillDate(date,'soc808');
-    const int405=getAttendedLecturesTillDate(date,'int405');
-    const int407=getAttendedLecturesTillDate(date,'int407');
+function calculateTotalPercentage(date) {
+    let total = 0;
+    for (const subject in totalLectures) {
+        total += totalLectures[subject];
+    }
 
-    const attended=int222+soc808+int407+int405;
+    let attended = 0;
+    for (const subject of subjects) {
+        attended += getAttendedLecturesTillDate(date, subject);
 
-    return +(attended/total*100).toFixed(2)
+    }
+
+    return +(attended / total * 100).toFixed(2)
 }
 
 function getAttendedLecturesTillDate(tillDate, subject) {
@@ -86,11 +90,10 @@ function getCalender() {
         date.setDate(i)
         obj.date = date;
 
-        obj.int222 = { lecturesToday: isDateHoliday(date) ? 0 : daysOfWeek[date.getDay()].int222 }
-        obj.soc808 = { lecturesToday: isDateHoliday(date) ? 0 : daysOfWeek[date.getDay()].soc808 };
-        obj.int407 = { lecturesToday: isDateHoliday(date) ? 0 : daysOfWeek[date.getDay()].int407 };
-        obj.int405 = { lecturesToday: isDateHoliday(date) ? 0 : daysOfWeek[date.getDay()].int405 };
+        for (const subject of subjects) {
+            obj[subject] = { lecturesToday: isDateHoliday(date) ? 0 : daysOfWeek[date.getDay()][subject] }
 
+        }
 
         res.push(obj)
     }
@@ -104,20 +107,14 @@ function isDateHoliday(date) {
 }
 
 function getTotalLectures() {
-    const totalLectures = {
-        int222: calender.reduce((acc, date) => {
-            return acc + date.int222.lecturesToday;
-        }, 0),
 
-        soc808: calender.reduce((acc, date) => {
-            return acc + date.soc808.lecturesToday;
-        }, 0),
-        int405: calender.reduce((acc, date) => {
-            return acc + date.int405.lecturesToday;
-        }, 0)
-        , int407: calender.reduce((acc, date) => {
-            return acc + date.int407.lecturesToday;
+    const totalLectures = {};
+
+    for (const subject of subjects) {
+        totalLectures[subject] = calender.reduce((acc, date) => {
+            return acc + date[subject].lecturesToday;
         }, 0)
     }
+
     return totalLectures;
 }
