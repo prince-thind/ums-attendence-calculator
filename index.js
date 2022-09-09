@@ -1,17 +1,32 @@
+const TOTAL_WEEKS=6;
+
 const fs = require('fs');
 const pen = fs.createWriteStream('./output.csv');
 
 const weekStructure = require('./weekStructure.json')
 const absents = require('./absents.json')
 const holidays = require('./holidays.json');
+const noClasses = require('./noClasses.json');
 
 const calender = getCalender();
+calender.forEach(removeNoClasses);
+
 const totalLectures = getTotalLectures();
 
 const finalCalender = calender.map(calculatePercentage);
 
 toCSV(finalCalender);
 
+
+function removeNoClasses(calenderDay){
+    const noClassesDay=noClasses.find(entry=>entry.date==calenderDay.date.toISOString().split("T")[0])
+    if(noClassesDay){
+        for(const [subject,missedClasses] of Object.entries(noClassesDay.subjects)){
+            calenderDay[subject].lecturesToday=calenderDay[subject].lecturesToday-missedClasses;
+        }
+
+    }
+}
 
 function toCSV() {
     pen.write('Date,Percentage,INT222,SOC888,INT407,INT405\n');
@@ -63,7 +78,7 @@ function getAttendedLecturesTillDate(tillDate, subject) {
 function getCalender() {
     const res = [];
     const daysOfWeek = weekStructure;
-    for (let i = 1; i <= 7 * 16; i++) {
+    for (let i = 1; i <= 7 * TOTAL_WEEKS; i++) {
         const obj = {};
 
         const date = new Date()
