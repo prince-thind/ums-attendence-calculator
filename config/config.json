@@ -1,4 +1,5 @@
 {
     "firstDay":"2022-07-29",
-    "lastday":"2022-11-20"
+    "lastday":"2022-11-20",
+    "showOnlyDaysWithClasses":"false"
 }
