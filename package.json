@@ -4,7 +4,10 @@
   "description": "+ weeks starts from sunday inside weekStructure.json + run npm start to generate a csv report of attedence",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "clean":"rm -rf dist output program program.zip",
+    "bundle": "pkg index.js -o ./dist/program -t linux,windows,mac",
+    "build": "npm run bundle && rm -rf ./program/program.zip && mkdir -p ./program && cp -r ./dist/* ./config ./program/ && zip ./program/program.zip ./program/* "
   },
   "repository": {
     "type": "git",
@@ -16,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/prince-thind-archive/ums-attendence-calculator/issues"
   },
-  "homepage": "https://github.com/prince-thind-archive/ums-attendence-calculator#readme"
+  "homepage": "https://github.com/prince-thind-archive/ums-attendence-calculator#readme",
+  "devDependencies": {
+    "pkg": "^5.8.0"
+  }
 }
