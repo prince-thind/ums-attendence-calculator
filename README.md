@@ -2,7 +2,7 @@
 basic utility to calcuate attendence. The utility takes into account the mid term exams, other holidays, you or the teacher being absent and also makeups. Play around with the configs and generate your report now!
 
 # Download
-### -> if you're not on a machine with nodeJS or want to use this quickly, download the release file from the github's release section (or simply click [here](https://github.com/prince-thind/ums-attendence-calculator/releases/download/v2.1.0/program.zip) to Download) and execute the program.
+### -> if you're not on a machine with nodeJS or want to use this quickly, download the release file from the github's release section (or simply click [here](https://github.com/prince-thind/ums-attendence-calculator/releases/download/v2.2.0/program.zip) to Download) and execute the program.
 
 ### -> if you're familiar with the node ecosystem then you can just clone this repo, edit the configs and run 'npm i; npm start' to get your report.
 
