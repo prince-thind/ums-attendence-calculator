@@ -7,7 +7,7 @@
     "start": "node index.js",
     "clean":"rm -rf dist output program program.zip",
     "bundle": "pkg index.js -o ./dist/program -t linux,windows,mac",
-    "build": "npm run bundle && rm -rf ./program/program.zip && mkdir -p ./program && cp -r ./dist/* ./config ./program/ && zip ./program/program.zip ./program/* "
+    "build": "npm run bundle && rm -rf ./program/program.zip && mkdir -p ./program && cp -r ./dist/* ./config ./program/ && zip -r ./program/program.zip ./program/* "
   },
   "repository": {
     "type": "git",
