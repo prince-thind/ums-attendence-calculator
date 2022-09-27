@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function Home() {
+export default function Home({ config }) {
   return (
     <div>
       <p>
@@ -10,8 +10,7 @@ export default function Home() {
       <button onClick={genrateCSV}>Generate</button>
     </div>
   );
-}
-
-function genrateCSV(){
-    alert('todo: generate csv')
+  function genrateCSV() {
+    console.log(config);
+  }
 }

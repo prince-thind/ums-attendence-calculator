@@ -12,7 +12,7 @@ export default function Configs() {
           <Link to="/configs/absents">Absents</Link>
         </li>
         <li>
-          <Link to="/configs/teacherOnLeave">Teachers On Leave</Link>
+          <Link to="/configs/teachersOnLeave">Teachers On Leave</Link>
         </li>
         <li>
           <Link to="/configs/makeups">Makeup Lectures</Link>

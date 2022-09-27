@@ -1,11 +1,11 @@
-import {  useState } from "react";
+import { useState } from "react";
 
-export default function MainConfig({ config, setConfig }) {
-  const [textData, setTextData] = useState(config.main);
+export default function GenericConfig({ config, setConfig, type }) {
+  const [textData, setTextData] = useState(config[type]);
 
   return (
     <div>
-      <p>Main Configuration File</p>
+      <p>Configuration File: {type}</p>
       <form onSubmit={saveConfig}>
         <textarea onChange={updateTextData}>{textData}</textarea>
         <button>Save</button>
@@ -21,8 +21,9 @@ export default function MainConfig({ config, setConfig }) {
     e.preventDefault();
     setConfig((config) => {
       const configCopy = JSON.parse(JSON.stringify(config ?? {}));
-      configCopy.main = textData;
+      configCopy[type] = textData;
       return configCopy;
     });
+    alert('saved!')
   }
 }
