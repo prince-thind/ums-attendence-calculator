@@ -4,7 +4,7 @@ export default function Home({ config }) {
   return (
     <div>
       <p>
-        Please Edit the configs before generating the CSV here:{" "}
+        Please Edit the configs before generating the CSV
         <Link to="configs">Configs</Link>
       </p>
       <button onClick={genrateCSV}>Generate</button>

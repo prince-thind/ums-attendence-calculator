@@ -4,11 +4,10 @@ import Layout from "./components/Layout";
 import Configs from "./pages/Configs";
 import Home from "./pages/Home";
 import GenericConfig from "./pages/GenericConfig";
+import sampleConfig from "./lib/sampleConfig";
 
 function App() {
-  const [config, setConfig] = useState(
-    JSON.parse(localStorage.getItem("config") ?? "{}")
-  );
+  const [config, setConfig] = useState(getConfig());
 
   useEffect(() => {
     localStorage.setItem("config", JSON.stringify(config));
@@ -18,7 +17,7 @@ function App() {
     <HashRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Home config={config}/>} />
+          <Route index element={<Home config={config} />} />
           <Route path="configs" element={<Configs />} />
           <Route
             path="configs/main"
@@ -84,6 +83,15 @@ function App() {
       </Routes>
     </HashRouter>
   );
+}
+
+function getConfig() {
+  const localConfig = JSON.parse(localStorage.getItem("config")??"{}");
+  console.log(localConfig)
+  if (Object.keys(localConfig).length > 1) {
+    return localConfig;
+  }
+  return sampleConfig;
 }
 
 export default App;

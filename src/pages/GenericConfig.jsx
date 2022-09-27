@@ -1,7 +1,9 @@
 import { useState } from "react";
 
 export default function GenericConfig({ config, setConfig, type }) {
-  const [textData, setTextData] = useState(config[type]);
+  const [textData, setTextData] = useState(
+    JSON.stringify(config[type], null, 1)
+  );
 
   return (
     <div>
@@ -24,6 +26,6 @@ export default function GenericConfig({ config, setConfig, type }) {
       configCopy[type] = textData;
       return configCopy;
     });
-    alert('saved!')
+    alert("saved!");
   }
 }
