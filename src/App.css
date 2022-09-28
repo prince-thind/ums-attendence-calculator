@@ -57,7 +57,6 @@ button:hover {
   margin: auto;
   border-collapse: collapse;
   text-align: center;
-  display: block;
   overflow-x: auto;
   white-space: nowrap;
 }
@@ -77,6 +76,7 @@ button:hover {
 
 @media screen and (max-width: 760px) {
   .main-table {
+    display: block;
     width: 100%;
   }
 }
