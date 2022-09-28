@@ -9,7 +9,7 @@ export default function GenericConfig({ config, setConfig, type }) {
     <div className="module">
       <h2>Configuration File: {type}</h2>
       <form onSubmit={saveConfig}>
-        <textarea onChange={updateTextData}>{textData}</textarea>
+        <textarea onChange={updateTextData} value={textData}></textarea>
         <button>Save</button>
       </form>
     </div>
@@ -23,7 +23,7 @@ export default function GenericConfig({ config, setConfig, type }) {
     e.preventDefault();
     setConfig((config) => {
       const configCopy = JSON.parse(JSON.stringify(config ?? {}));
-      configCopy[type] = textData;
+      configCopy[type] = JSON.parse(textData);
       return configCopy;
     });
     alert("saved!");
