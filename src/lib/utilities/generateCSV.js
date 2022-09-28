@@ -5,8 +5,9 @@ export default function generateCSV(report, masterConfig) {
     const config = masterConfig.main;
     const subjects = Object.keys(weekStructure[0])
 
-    let res = (`Date,Day,Percentage,${subjects.join(",")}\n`);
+    let res = (`S.No, Date,Day,Percentage,${subjects.join(",")}\n`);
 
+    let index=1;
     for (const entry of report) {
         const date = entry.date.toISOString().split('T')[0];
         const day = entry.date.toLocaleString('en-US', { weekday: 'long' })
@@ -20,7 +21,7 @@ export default function generateCSV(report, masterConfig) {
         percentages = percentages.slice(0, percentages.length-1)
 
 
-        res += (`${date},${day},${entry.percentage},${percentages}\n`)
+        res += (`${index++},${date},${day},${entry.percentage},${percentages}\n`)
     }
 
     return (res);
