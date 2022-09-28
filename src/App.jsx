@@ -5,7 +5,7 @@ import Configs from "./pages/Configs";
 import Home from "./pages/Home";
 import GenericConfig from "./pages/GenericConfig";
 import sampleConfig from "./lib/sampleConfig";
-import "./App.css"
+import "./App.css";
 
 function App() {
   const [config, setConfig] = useState(getConfig());
@@ -18,7 +18,10 @@ function App() {
     <HashRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Home config={config} />} />
+          <Route
+            index
+            element={<Home config={config} setConfig={setConfig} />}
+          />
           <Route path="configs" element={<Configs />} />
           <Route
             path="configs/main"
@@ -87,7 +90,7 @@ function App() {
 }
 
 function getConfig() {
-  const localConfig = JSON.parse(localStorage.getItem("config")??"{}");
+  const localConfig = JSON.parse(localStorage.getItem("config") ?? "{}");
   if (Object.keys(localConfig).length > 1) {
     return localConfig;
   }
