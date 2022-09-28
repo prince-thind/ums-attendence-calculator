@@ -1,6 +1,11 @@
 import { useState } from "react";
 
-export default function GenericConfig({ config, setConfig, type }) {
+export default function GenericConfig({
+  config,
+  setConfig,
+  type,
+  instructions,
+}) {
   const [textData, setTextData] = useState(
     JSON.stringify(config[type], null, 1)
   );
@@ -11,6 +16,7 @@ export default function GenericConfig({ config, setConfig, type }) {
       <h2>Configuration File: {type}</h2>
       <form onSubmit={saveConfig}>
         <textarea onChange={updateTextData} value={textData}></textarea>
+        <p className="instructions"> Note: {instructions??"N/A"}</p>
         <p className="error"> {error}</p>
         <button>Save</button>
       </form>
@@ -27,7 +33,7 @@ export default function GenericConfig({ config, setConfig, type }) {
 
   function saveConfig(e) {
     e.preventDefault();
-    if (error) return alert('please fix the errors first!');
+    if (error) return alert("please fix the errors first!");
 
     setConfig((config) => {
       const configCopy = JSON.parse(JSON.stringify(config ?? {}));

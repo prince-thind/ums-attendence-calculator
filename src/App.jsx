@@ -80,6 +80,7 @@ function App() {
                 config={config}
                 setConfig={setConfig}
                 type="weekStructure"
+                instructions="weeks start from sunday"
               />
             }
           />
