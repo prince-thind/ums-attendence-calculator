@@ -5,6 +5,7 @@ import Configs from "./pages/Configs";
 import Home from "./pages/Home";
 import GenericConfig from "./pages/GenericConfig";
 import sampleConfig from "./lib/sampleConfig";
+import "./App.css"
 
 function App() {
   const [config, setConfig] = useState(getConfig());
@@ -87,7 +88,6 @@ function App() {
 
 function getConfig() {
   const localConfig = JSON.parse(localStorage.getItem("config")??"{}");
-  console.log(localConfig)
   if (Object.keys(localConfig).length > 1) {
     return localConfig;
   }

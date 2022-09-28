@@ -6,8 +6,8 @@ export default function GenericConfig({ config, setConfig, type }) {
   );
 
   return (
-    <div>
-      <p>Configuration File: {type}</p>
+    <div className="module">
+      <h2>Configuration File: {type}</h2>
       <form onSubmit={saveConfig}>
         <textarea onChange={updateTextData}>{textData}</textarea>
         <button>Save</button>

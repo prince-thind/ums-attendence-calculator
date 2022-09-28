@@ -1,0 +1,48 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    /* text-align: center; */
+}
+
+button{
+    padding:0.5rem 2rem;
+    font-size: 1.5rem;
+    display: block;
+    margin: 3rem auto;
+
+}
+button:hover{
+    cursor: pointer;
+}
+
+.nav-links{
+    display: flex;
+    background-color: hsl(56, 50%, 50%);
+    font-size: 1.2rem;
+    list-style: none;
+}
+.nav-links li{
+    padding:1rem;
+}
+
+.module{
+    padding-left: 2rem;
+}
+.module h2{
+    padding: 0.5rem 1rem;
+}
+.module li{
+    padding: 0.2rem;
+}
+.module textarea{
+    width: 90%;
+    height: 50vh;
+    padding: 1rem;
+    background-color: black;
+    color:white;
+    border:2px solid gray;
+}

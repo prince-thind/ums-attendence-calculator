@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 
 export default function Configs() {
   return (
-    <div>
-        <p> Select any of the configs to edit or <Link to="/">Go Back to Home</Link></p>
+    <div className="module">
+        <h2> Select a Config to Edit</h2>
       <ul>
         <li>
           <Link to="/configs/main">Main</Link>

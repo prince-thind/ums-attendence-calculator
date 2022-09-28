@@ -15,7 +15,7 @@ function Header() {
   return (
     <header className="header">
       <nav>
-        <ul>
+        <ul className="nav-links">
           <li>
             <Link to="/">Home</Link>{" "}
           </li>
