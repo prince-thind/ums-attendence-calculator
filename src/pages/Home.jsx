@@ -1,5 +1,6 @@
 import sampleConfig from "../lib/sampleConfig";
 import { Link } from "react-router-dom";
+import processConfig from "../lib/processConfig";
 
 export default function Home({ config, setConfig }) {
   return (
@@ -34,11 +35,11 @@ export default function Home({ config, setConfig }) {
     </div>
   );
   function genrateCSV() {
-    console.log(config);
+    processConfig(config);
   }
 
   function resetConfigs() {
     setConfig(sampleConfig);
-    alert('configs reset!')
+    alert("configs reset!");
   }
 }
