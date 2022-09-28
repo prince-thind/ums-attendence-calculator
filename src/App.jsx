@@ -40,6 +40,7 @@ function App() {
                 config={config}
                 setConfig={setConfig}
                 type="absents"
+                instructions="Each date entry signifies a single absent Lecture, duplicates signify multiple"
               />
             }
           />
@@ -49,6 +50,7 @@ function App() {
               <GenericConfig
                 config={config}
                 setConfig={setConfig}
+                instructions="Each date entry signifies a single Lecture missed by teacher, duplicates signify multiple"
                 type="teachersOnLeave"
               />
             }
@@ -59,6 +61,7 @@ function App() {
               <GenericConfig
                 config={config}
                 setConfig={setConfig}
+                instructions="Each date entry signifies a single makeup Lecture, duplicates signify multiple"
                 type="makeups"
               />
             }
