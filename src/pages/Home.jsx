@@ -1,8 +1,12 @@
 import sampleConfig from "../lib/sampleConfig";
 import { Link } from "react-router-dom";
 import processConfig from "../lib/processConfig";
+import { useState } from "react";
+import Table from "../components/Table";
 
 export default function Home({ config, setConfig }) {
+  const [csvData, setCsvData] = useState(null);
+
   return (
     <div className="module">
       <h2>Instructions</h2>
@@ -32,10 +36,12 @@ export default function Home({ config, setConfig }) {
         </li>
       </ul>
       <button onClick={genrateCSV}>Generate CSV</button>
+      {csvData && <Table csvData={csvData} />}
     </div>
   );
   function genrateCSV() {
-    processConfig(config);
+    const csvString = processConfig(config);
+    setCsvData(csvString);
   }
 
   function resetConfigs() {
