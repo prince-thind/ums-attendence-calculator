@@ -6,8 +6,9 @@ export default function Table({ csvData }) {
     return rawRow.split(",");
   });
 
+
   return (
-    <table>
+    <table className="main-table">
       <thead>
         <tr>
           {header.map((heading, index) => {

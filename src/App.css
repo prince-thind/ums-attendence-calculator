@@ -1,53 +1,82 @@
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
-body{
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    /* text-align: center; */
-}
-
-button{
-    padding:0.5rem 2rem;
-    font-size: 1.5rem;
-    display: block;
-    margin: 3rem auto;
-
-}
-button:hover{
-    cursor: pointer;
+body {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  /* text-align: center; */
 }
 
-.nav-links{
-    display: flex;
-    background-color: hsl(56, 50%, 50%);
-    font-size: 1.2rem;
-    list-style: none;
+button {
+  padding: 0.5rem 2rem;
+  font-size: 1.5rem;
+  display: block;
+  margin: 3rem auto;
 }
-.nav-links li{
-    padding:1rem;
+button:hover {
+  cursor: pointer;
 }
 
-.module{
-    padding-left: 2rem;
+.nav-links {
+  display: flex;
+  background-color: hsl(56, 50%, 50%);
+  font-size: 1.2rem;
+  list-style: none;
 }
-.module h2{
-    padding: 0.5rem 1rem;
+.nav-links li {
+  padding: 1rem;
 }
-.module li{
-    padding: 0.2rem;
+
+.module section {
+  padding-left: 2rem;
 }
-.module textarea{
-    width: 90%;
-    height: 50vh;
-    padding: 1rem;
-    background-color: black;
-    color:white;
-    border:2px solid gray;
+.module h2 {
+  padding: 0.5rem 1rem;
 }
-.error{
-    font-size: larger;
-    padding-top: 0.5rem;
-    color: red;
+.module li {
+  padding: 0.2rem;
+}
+.module textarea {
+  width: 90%;
+  height: 50vh;
+  padding: 1rem;
+  background-color: black;
+  color: white;
+  border: 2px solid gray;
+}
+.error {
+  font-size: larger;
+  padding-top: 0.5rem;
+  color: red;
+}
+
+.main-table {
+  table-layout: fixed;
+  width: 70%;
+  margin: auto;
+  border-collapse: collapse;
+  text-align: center;
+  display: block;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.main-table th {
+  padding: 0.5rem;
+  background-color: hsl(0, 0%, 90%);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  box-shadow: inset 0 1px 0 black, inset 0 -1px 0 black;
+}
+.main-table th,
+.main-table td {
+  border: 1px solid black;
+}
+
+@media screen and (max-width: 760px) {
+  .main-table {
+    width: 100%;
+  }
 }

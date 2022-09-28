@@ -8,7 +8,7 @@ export default function generateCSV(report, masterConfig) {
     let res = (`Date,Day,Percentage,${subjects.join(",")}\n`);
 
     for (const entry of report) {
-        const date = entry.date.toLocaleString().split(',')[0];
+        const date = entry.date.toISOString().split('T')[0];
         const day = entry.date.toLocaleString('en-US', { weekday: 'long' })
 
         if (shouldSkip(entry, config, subjects)) continue;
@@ -17,6 +17,7 @@ export default function generateCSV(report, masterConfig) {
         for (const sub of subjects) {
             percentages += entry[sub].percentage + ","
         }
+        percentages = percentages.slice(0, percentages.length-1)
 
 
         res += (`${date},${day},${entry.percentage},${percentages}\n`)

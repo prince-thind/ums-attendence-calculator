@@ -13,13 +13,15 @@ export default function GenericConfig({
 
   return (
     <div className="module">
-      <h2>Configuration File: {type}</h2>
-      <form onSubmit={saveConfig}>
-        <textarea onChange={updateTextData} value={textData}></textarea>
-        <p className="instructions"> Note: {instructions??"N/A"}</p>
-        <p className="error"> {error}</p>
-        <button>Save</button>
-      </form>
+      <section>
+        <h2>Configuration File: {type}</h2>
+        <form onSubmit={saveConfig}>
+          <textarea onChange={updateTextData} value={textData}></textarea>
+          <p className="instructions"> Note: {instructions ?? "N/A"}</p>
+          <p className="error"> {error}</p>
+          <button>Save</button>
+        </form>
+      </section>
     </div>
   );
 
