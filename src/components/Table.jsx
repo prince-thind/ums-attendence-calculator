@@ -2,10 +2,11 @@ export default function Table({ csvData }) {
   const csvArr = csvData.split("\n");
   const header = csvArr.shift().split(",");
 
+  csvArr.pop(); //removing the trailing \n
+
   const rows = csvArr.map((rawRow) => {
     return rawRow.split(",");
   });
-
 
   return (
     <table className="main-table">
