@@ -71,6 +71,7 @@ button:hover {
 }
 .main-table th,
 .main-table td {
+  background-clip: padding-box;
   border: 1px solid black;
 }
 
