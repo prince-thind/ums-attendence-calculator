@@ -22,7 +22,7 @@ function App() {
             index
             element={<Home config={config} setConfig={setConfig} />}
           />
-          <Route path="configs" element={<Configs />} />
+          <Route path="configs" element={<Configs config={config} setConfig={setConfig}/>} />
           <Route
             path="configs/main"
             element={

@@ -74,6 +74,15 @@ button:hover {
   border: 1px solid black;
 }
 
+.upload-form {
+  max-width: fit-content;
+  margin: auto;
+}
+.upload-form fieldset {
+  padding: 1rem;
+  padding-bottom: 0;
+}
+
 @media screen and (max-width: 760px) {
   .main-table {
     display: block;

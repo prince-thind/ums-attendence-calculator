@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
+import FileUpload from "../components/FIleUpload";
+import download from "../lib/download";
 
-export default function Configs() {
+export default function Configs({ config, setConfig }) {
   return (
     <div className="module">
       <section>
@@ -25,6 +27,14 @@ export default function Configs() {
             <Link to="/configs/weekStructure">Week Structure</Link>
           </li>
         </ul>
+        <button
+          onClick={() => {
+            download( config.main.fileName+'\'sConfig.json',JSON.stringify(config, null, 1));
+          }}
+        >
+          Download Config
+        </button>
+        <FileUpload setConfig={setConfig}/>
       </section>
     </div>
   );

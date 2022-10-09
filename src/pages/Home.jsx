@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import processConfig from "../lib/processConfig";
 import { useState } from "react";
 import Table from "../components/Table";
-import download from "../lib/downloadCSV";
+import download from "../lib/download";
 
 export default function Home({ config, setConfig }) {
   const [csvData, setCsvData] = useState(null);
@@ -44,7 +44,7 @@ export default function Home({ config, setConfig }) {
       {csvData && (
         <button
           onClick={() => {
-            download(csvData, config.main.fileName);
+            download(config.main.fileName + ".csv", csvData);
           }}
         >
           Download CSV

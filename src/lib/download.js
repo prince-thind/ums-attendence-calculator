@@ -1,10 +1,10 @@
-export default function download(str, fileName) {
+export default function download(fileName, str) {
     const element = document.createElement("a");
     element.setAttribute(
         "href",
         "data:text/plain;charset=utf-8," + encodeURIComponent(str)
     );
-    element.setAttribute("download", fileName + '.csv');
+    element.setAttribute("download", fileName);
 
     element.style.display = "none";
     document.body.appendChild(element);
