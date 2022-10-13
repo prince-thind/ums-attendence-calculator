@@ -84,6 +84,10 @@ button:hover {
   padding-bottom: 0;
 }
 
+.active-date{
+  background-color: hsl(240, 25%, 85%);
+}
+
 @media screen and (max-width: 760px) {
   .main-table {
     display: block;

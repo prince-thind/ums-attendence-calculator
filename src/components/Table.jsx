@@ -8,6 +8,14 @@ export default function Table({ csvData }) {
     return rawRow.split(",");
   });
 
+  const closestDateToToday = rows
+    .map((r) => r[1])
+    .filter((date) => {
+      const today = new Date();
+      return +new Date(date) <= +today;
+    })
+    .pop();
+
   return (
     <table className="main-table">
       <thead>
@@ -20,7 +28,10 @@ export default function Table({ csvData }) {
       <tbody>
         {rows.map((row, index) => {
           return (
-            <tr key={index}>
+            <tr
+              key={index}
+              className={row[1] == closestDateToToday ? "active-date" : ""}
+            >
               {row.map((cell, index) => {
                 return <td key={index}>{cell}</td>;
               })}
