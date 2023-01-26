@@ -3,10 +3,12 @@ import { Link } from "react-router-dom";
 import processConfig from "../lib/processConfig";
 import { useState } from "react";
 import Table from "../components/Table";
+import Stats from "../components/Stats";
 import download from "../lib/download";
 
 export default function Home({ config, setConfig }) {
   const [csvData, setCsvData] = useState(null);
+  const [statsData, setStatsData] = useState(null);
 
   return (
     <div className="module">
@@ -41,6 +43,9 @@ export default function Home({ config, setConfig }) {
       <button onClick={genrateCSV}>Generate Report</button>
 
       {csvData && <Table csvData={csvData} />}
+      {statsData && (
+        <Stats statsData={statsData} csvData={csvData} config={config} />
+      )}
       {csvData && (
         <button
           onClick={() => {
@@ -53,8 +58,9 @@ export default function Home({ config, setConfig }) {
     </div>
   );
   function genrateCSV() {
-    const csvString = processConfig(config);
+    const [csvString, stats] = processConfig(config);
     setCsvData(csvString);
+    setStatsData(stats);
   }
 
   function resetConfigs() {

@@ -26,15 +26,21 @@ export default function Configs({ config, setConfig }) {
           <li>
             <Link to="/configs/weekStructure">Week Structure</Link>
           </li>
+          <li>
+            <Link to="/configs/dutyLeaves">Duty Leaves</Link>
+          </li>
         </ul>
         <button
           onClick={() => {
-            download( config.main.fileName+'\'sConfig.json',JSON.stringify(config, null, 1));
+            download(
+              config.main.fileName + "'sConfig.json",
+              JSON.stringify(config, null, 1)
+            );
           }}
         >
           Download Config
         </button>
-        <FileUpload setConfig={setConfig}/>
+        <FileUpload setConfig={setConfig} />
       </section>
     </div>
   );

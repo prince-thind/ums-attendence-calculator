@@ -1,6 +1,7 @@
 const config = {
   absents: {
     int301: ["2023-01-18"],
+    int411: ["2023-01-17"],
   },
   main: {
     firstDay: "2023-01-05",

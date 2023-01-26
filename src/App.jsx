@@ -22,7 +22,10 @@ function App() {
             index
             element={<Home config={config} setConfig={setConfig} />}
           />
-          <Route path="configs" element={<Configs config={config} setConfig={setConfig}/>} />
+          <Route
+            path="configs"
+            element={<Configs config={config} setConfig={setConfig} />}
+          />
           <Route
             path="configs/main"
             element={
@@ -84,6 +87,16 @@ function App() {
                 setConfig={setConfig}
                 type="weekStructure"
                 instructions="weeks start from sunday"
+              />
+            }
+          />
+          <Route
+            path="configs/dutyLeaves"
+            element={
+              <GenericConfig
+                config={config}
+                setConfig={setConfig}
+                type="dutyLeaves"
               />
             }
           />

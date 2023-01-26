@@ -84,8 +84,13 @@ button:hover {
   padding-bottom: 0;
 }
 
-.active-date{
+.active-date {
   background-color: hsl(240, 25%, 85%);
+}
+
+.stats {
+  font-size: 1.2rem;
+  padding: 2rem 4rem;
 }
 
 @media screen and (max-width: 760px) {
