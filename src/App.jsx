@@ -10,9 +10,17 @@ import "./App.css";
 function App() {
   const [config, setConfig] = useState(getConfig());
 
+  const configASCII = btoa(JSON.stringify(config));
+
   useEffect(() => {
-    localStorage.setItem("config", JSON.stringify(config));
-  }, [config]);
+    const url = new URL(window.location);
+    const presentData = url.searchParams.get("data");
+
+    if (presentData === configASCII) return;
+
+    url.searchParams.set("data", configASCII);
+    window.history.pushState(null, "", url.toString());
+  }, [configASCII]);
 
   return (
     <HashRouter>
@@ -107,10 +115,18 @@ function App() {
 }
 
 function getConfig() {
-  const localConfig = JSON.parse(localStorage.getItem("config") ?? "{}");
-  if (Object.keys(localConfig).length > 1) {
-    return localConfig;
+  const url = new URL(window.location);
+  const presentData = url.searchParams.get("data");
+
+  if (presentData) {
+    const urlConfig = JSON.parse(atob(presentData));
+    const localConfig = urlConfig ?? "{}";
+
+    if (Object.keys(localConfig).length > 1) {
+      return localConfig;
+    }
   }
+
   return sampleConfig;
 }
 
