@@ -20,6 +20,7 @@ function App() {
 
     url.searchParams.set("data", configASCII);
     window.history.pushState(null, "", url.toString());
+    localStorage.setItem("config", configASCII);
   }, [configASCII]);
 
   return (
@@ -124,6 +125,11 @@ function getConfig() {
 
     if (Object.keys(localConfig).length > 1) {
       return localConfig;
+    }
+  } else {
+    const savedConfig = localStorage.getItem("config");
+    if (savedConfig) {
+      return JSON.parse(atob(savedConfig));
     }
   }
 
